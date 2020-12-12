@@ -1,12 +1,14 @@
 """
 Angel Gaspar
 GitHub: angelgaspar
-Last update: November 19th, 2020
+Last update: December 11th, 2020
 Python 3.7
 
 Modifications:
    1.-The initial array written by the user was removed.
    2.-The initial positions are initialized within the search range minimum and maximum randomly.
+   3.-The first iteration always was -1.00 the problem was fixed.
+   4.-More decimals was added.
 
 Original code without my modifications:
 Nathan A. Rooy
@@ -84,9 +86,8 @@ def minimize(cost_function, dimensions, bounds, num_particles, max_iter, verbose
         swarm.append(Particle(bounds))
 
     # begin optimization loop
-    i = 0
-    while i < max_iter:
-        if verbose: print(f'iter: {i:>4d}, best solution: {err_best_g:10.6f}')
+    i = 1
+    while i <= max_iter:
 
         # cycle through particles in swarm and evaluate fitness
         for j in range(0, num_particles):
@@ -101,6 +102,9 @@ def minimize(cost_function, dimensions, bounds, num_particles, max_iter, verbose
         for j in range(0, num_particles):
             swarm[j].update_velocity(pos_best_g)
             swarm[j].update_position(bounds)
+
+        if verbose: print(f'iter: {i:>4d}, best solution: {err_best_g:10.12f}')
+
         i += 1
 
     # print final results
@@ -120,6 +124,6 @@ def sphere(x):
 
 
 # settings
-num_dimensions = 2
-bounds = [(-10, 10), (-10, 10)]
+num_dimensions = 2  # dimensions
+bounds = [(-10, 10), (-10, 10)]  # input bounds [(x1_min, x1_max), (x2_min, x2_max), ...]
 minimize(sphere, num_dimensions, bounds, num_particles=15, max_iter=30, verbose=True)

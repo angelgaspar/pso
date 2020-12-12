@@ -20,7 +20,7 @@ If you replace the objective function with your own objective function you will 
 ```python
 # settings
 num_dimensions = 2
-bounds = [(-10, 10), (-10, 10)]
+bounds = [(-10, 10), (-10, 10)] # input bounds [(x1_min, x1_max), (x2_min, x2_max), ...]
 minimize(sphere, num_dimensions, bounds, num_particles=15, max_iter=30, verbose=True)
 ```
 And that's it let's minimize functions. Enjoy this repository.
